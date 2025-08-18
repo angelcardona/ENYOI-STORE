@@ -1,0 +1,9 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///db_user;
+    username: sa
+    password:
+  sql:
+    init:
+      enabled: true
+      schema-locations: classpath:schema.sql

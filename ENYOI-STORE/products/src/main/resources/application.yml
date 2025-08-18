@@ -1,0 +1,13 @@
+spring:
+
+  r2dbc:
+    url: r2dbc:h2:mem:///db;
+    username: sa
+    password: sa
+  sql:
+    init:
+      enabled: true
+      mode: always
+  h2:
+    console:
+      enabled: true

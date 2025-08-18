@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS users(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    address VARCHAR(30) NOT NULL,
+    phone VARCHAR(30) NOT NULL
+);
