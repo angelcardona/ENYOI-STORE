@@ -1,9 +1,9 @@
-package com.store.products.infraestructure.adapaters.out;
+package com.store.products.infraestructure.adapaters.out.persistence;
 
 import org.springframework.stereotype.Component;
 
 import com.store.products.domain.models.Product;
-import com.store.products.domain.ports.out.IProductPersistencePort;
+import com.store.products.domain.ports.out.persistence.IProductPersistencePort;
 import com.store.products.infraestructure.adapaters.out.repository.SpringReactiveRepository;
 import com.store.products.infraestructure.mapper.ProductMapper;
 

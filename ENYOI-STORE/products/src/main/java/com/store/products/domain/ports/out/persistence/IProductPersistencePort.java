@@ -1,4 +1,4 @@
-package com.store.products.domain.ports.out;
+package com.store.products.domain.ports.out.persistence;
 
 import com.store.products.domain.models.Product;
 

@@ -1,17 +1,9 @@
 package com.store.products.infraestructure.adapaters.in.controller;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.store.products.infraestructure.adapaters.in.dto.*;
+import org.springframework.web.bind.annotation.*;
 
 import com.store.products.domain.ports.in.ProductUsesCases;
-import com.store.products.infraestructure.adapaters.in.dto.ProductRequestDto;
-import com.store.products.infraestructure.adapaters.in.dto.ProductResponseDto;
 import com.store.products.infraestructure.mapper.ProductMapper;
 
 import jakarta.validation.Valid;
@@ -46,6 +38,43 @@ public class ProductController {
     @DeleteMapping("/{productId}")
     public Mono<Void> deleteProduct(@PathVariable Long productId){
         return usesCases.deleteProduct(productId);
+    }
+    @PostMapping ("/increment/{productId}")
+    public Mono<IncrementStockResponse> incrementStock(@PathVariable Long productId, @RequestParam Integer quantity) {
+        return usesCases.incrementStock(productId, quantity)
+                .then(Mono.just(new IncrementStockResponse("Stock was incremented successfully", productId)));
+    }
+
+    @PostMapping ("/decrement/{productId}")
+    public Mono<DecrementStockResponse> decrementStock(@PathVariable Long productId, @RequestParam Integer quantity) {
+        return usesCases.decrementStock(productId, quantity)
+                .then(Mono.just(new DecrementStockResponse("Stock was decremented successfully", productId)));
+    }
+
+    @PostMapping("/reserve/{productId}")
+    public Mono<ReservationResponse> reserveStock(@PathVariable Long productId, @RequestParam Integer quantity) {
+        return usesCases.reserveStock(productId, quantity)
+                .then(Mono.just(new ReservationResponse(
+                        String.format("Stock successfully reserved for product %d. Quantity: %d", productId, quantity),
+                        productId,
+                        quantity
+                )));
+    }
+
+    @PutMapping("/recover/{productId}")
+    public Mono<ReservationResponse> recoveryStock(@PathVariable Long productId, @RequestParam Integer quantity) {
+        return usesCases.recoveryStock(productId, quantity)
+                .then(Mono.just(new ReservationResponse(
+                        String.format(" Stock successfully recovered for product %d. Quantity: %d", productId, quantity),
+                        productId,
+                        quantity
+                )));
+    }
+
+    @GetMapping("/available/{productId}")
+    public Mono<AvailableStockResponse> getAvailableStock(@PathVariable Long productId) {
+        return usesCases.getAvailableStock(productId)
+                .map(available -> new AvailableStockResponse(productId, available));
     }
 
 }

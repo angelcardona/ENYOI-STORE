@@ -12,5 +12,12 @@ public interface ProductUsesCases {
     Mono<Product> updateProduct(Long productId,Product product);
     Flux<Product> getAllProducts();
     Mono<Void> deleteProduct(Long id);
+    Mono<Void> incrementStock(Long productId, Integer quantity);
+    Mono<Void>  decrementStock(Long productId, Integer quantity);
+    Mono<Void> reserveStock(Long productId,Integer quantity);
+    Mono<Integer> getAvailableStock(Long productId);
+    Mono<Void> recoveryStock(Long productId,Integer quantity);
+    Mono<Void> recoveryStockFromReturn(Long productId,Integer quantity);
+
 
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductRequestDto {
 
-    
+    private String sku;
     private String name;
     private String category;
     private String description;
